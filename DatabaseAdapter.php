@@ -72,9 +72,9 @@ class DatabaseAdapter {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
+/*
 $theDBA = new DatabaseAdapter ();
 $arr = $theDBA->getFavorites (0);
 print_r ($arr);
-
+*/
 ?>
