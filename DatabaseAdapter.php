@@ -45,25 +45,29 @@ class DatabaseAdapter {
     public function addUser ($ID, $Name, $Password) {
         $stmt = $this->DB->prepare( "INSERT INTO customers values (". $ID .", ". $Name .", ". $Password .")" );
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function addRecipe ($ID, $Name) {
-        $stmt = $this->DB->prepare( "INSERT INTO recipes values(". $ID .", ". $Name .")" );
+        $stmt = $this->DB->prepare( "INSERT INTO recipes values(". $ID .", ". $Name .", 0)" );
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function addFavorite ($CustomerID, $RecipeID) {
-        $stmt = $this->DB->prepare( "INSERT INTO favorites values (". $CustomerID .", ". $RecipeID .")" );
+        $stmt = $this->DB->prepare( "UPDATE recipes SET Favorited = Favorited+1 WHERE ID = ". $RecipeID ."" );
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->DB->prepare( "UPDATE recipes SET Favorited = Favorited+1 WHERE ID = ". $RecipeID .";INSERT INTO favorites values (". $CustomerID .", ". $RecipeID .")" );
+        $stmt->execute();
+        //return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function removeFavorite ($CustomerID, $RecipeID) {
+        $stmt = $this->DB->prepare( "UPDATE recipes SET Favorited = Favorited-1 WHERE ID = ". $RecipeID ."" );
+        $stmt->execute();
         $stmt = $this->DB->prepare( "DELETE FROM favorites WHERE customerID = ". $CustomerID ." AND recipeID = ". $RecipeID ."" );
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function getFavorites ($ID) {
@@ -71,10 +75,15 @@ class DatabaseAdapter {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function FavoriteList(){//returns a list of recipes ordered by favorited
+        $stmt = $this->DB->prepare( "SELECT * FROM recipes ORDER BY Favorited DESC;");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 /*
 $theDBA = new DatabaseAdapter ();
-$arr = $theDBA->getFavorites (0);
-print_r ($arr);
-*/
+$arr = $theDBA->getFavorites (1);
+print_r ($arr);*/
 ?>
