@@ -2,20 +2,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
 <title>Form Submit</title>
+<script>
+	function submitRecipe(){
+		var input = document.getElementById("plate").value;
+		var ajax = new XMLHttpRequest();
+	   	var url = "controller.php?method=addRecipe&name=" + input;
+	   	//var url = "DatabaseAdaptor.php";
+	   	ajax.open("GET", url, true); // Arguments Method, url, async 
+	   	ajax.send();
+	   	ajax.onreadystatechange = function () { 
+	   		if (ajax.readyState == 4 && ajax.status == 200) {
+	   	   		 var docu = document.getElementById("divToChange");
+	   	   		 var arr = ajax.responseText;
+	   	   		 docu.innerHTML += arr;
+	   	   	}
+	   	   	else {
+	   	   		//document.getElementById("divToChange").innerHTML = "failure";
+	   	   	}
+	   	}
+		//alert(input);
+	}
+</script>
 </head>
 <body>
+<!-- Navigation bar -->
+   <div class = "navigation">
+      <ul>
+         <li><a href="index.html" class="current"> Home</a></li>
+         <li><a href="salad.html"> Recipes</a> </li>
+         <li><a href="form.html"> Form</a> </li>
+         <li><a href="chicken.html"> Login</a> </li>
+      </ul>
+   </div>
+	<div id="divToChange"></div>
 	<h1>Submit Recipes</h1>
-	<form onsubmit = "">
+	<form onsubmit = "submitRecipe(); return false;">
 		<fieldset>
 			<legend>Your Recipes</legend>
 			Name of Plate:<br>
-			<input id = "plate" type = "text"><br>
-			Ingredence/Amount: <br>
-			<textarea id = "ingred" rows = 15 cols = 40></textarea><br>
+			<input id = "plate" type = "text" placeholder="Chicken Thigh"><br>
+			Number of Servings:<br>
+			<input id = "servings" type="number" placeholder="1"><br>
+			Ingredients/Amount: (Ingredient Name, # Amount Type)<br>
+			<textarea id = "ingred" rows = 10 cols = 40 placeholder="Chicken Thighs, 1 thigh&#x0a;Salt, 1 pinch"></textarea><br>
 			List of Steps:<br>
-			<textarea id = "steps" rows = 15 cols = 50></textarea><br>
+			<textarea id = "steps" rows = 15 cols = 50 placeholder="1. Heat skillet&#x0a;2. Add thigh&#x0a;3. Add salt"></textarea><br>
 			<input type = "submit" value = "submit">
 		</fieldset>
 	</form>

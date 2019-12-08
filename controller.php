@@ -15,4 +15,13 @@ if($method === 'matchName'){//currently creates a table printing out user found 
         echo "</table>";
     }
 }
+if($method === 'addRecipe'){
+    $theDBA = new DatabaseAdapter();
+    $name = $_GET['name'];
+    $numHolder = $theDBA->numRecipes();
+    $num = $numHolder[0]['COUNT(*)'];
+    $theDBA->addRecipe((int)$num, $name);
+    echo "submitted";
+    //alert("creating recipe:" . $name . ", with id: " . $num);
+}
 ?>

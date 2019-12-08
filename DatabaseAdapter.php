@@ -49,7 +49,7 @@ class DatabaseAdapter {
     }
     
     public function addRecipe ($ID, $Name) {
-        $stmt = $this->DB->prepare( "INSERT INTO recipes values(". $ID .", ". $Name .", 0)" );
+        $stmt = $this->DB->prepare( "INSERT INTO recipes values(". $ID .", '". $Name ."', 0)" );
         $stmt->execute();
         //return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -81,9 +81,16 @@ class DatabaseAdapter {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function numRecipes(){
+        $stmt = $this->DB->prepare( "select COUNT(*) FROM recipes;");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 /*
 $theDBA = new DatabaseAdapter ();
-$arr = $theDBA->getFavorites (1);
-print_r ($arr);*/
+$theDBA->addRecipe(0, "test");
+//$arr = $theDBA->addRecipe(0, 'test');
+//print_r ($arr);*/
 ?>
