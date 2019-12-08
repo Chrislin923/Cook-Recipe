@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Recipes</title>
+   <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body onload= "showAll()">
+<h1>Recipes</h1>
+   <!-- Navigation bar -->
+   <div class = "navigation">
+      <ul>
+         <li><a href="index.html"> Home</a></li>
+         <li><a href="recipes.html" class="current"> Recipes</a> </li>
+         <li><a href="form.html"> Form</a> </li>
+         <li><a href=""> Login</a> </li>
+      </ul>
+   </div>
+   <div id="toChange"></div>
+   <script>
+   var cover = document.getElementById("toChange");
+	function showAll() {
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "recipes.php?command=showAll", true);
+		ajax.send();
+		ajax.onreadystatechange = function() {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var array = JSON.parse(ajax.responseText);
+				var str = "";
+				for (var index = 0; index < array.length; index++) {
+					str += "<img onclick = 'recipe(event)' id = '"+index + "''" + "' class = 'oneRecipe' src = "+ array[index]+ ">"
+				}
+				cover.innerHTML = str;
+			}
+		}
+	}
+	function recipe(event){
+		var id = event.target.id;
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "recipes.php?text=" + id, true);
+		ajax.send();
+		ajax.onreadystatechange =
+		function () {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				cover.innerHTML = ajax.responseText;
+			}
+		}
+	}
+   </script>
+
+</body>
+</html>
