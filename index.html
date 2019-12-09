@@ -5,28 +5,53 @@
 <head>
    <title>The Chef</title>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <link rel="stylesheet" type="text/css" href="style.css" />
+   <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
-<body>
+<body onload = "show()">
    <h1>The Chef's Recipes</h1>
    <!-- Navigation bar -->
    <div class = "navigation">
       <ul>
          <li><a href="index.html" class="current"> Home</a></li>
-         <li><a href="salad.html"> Recipes</a> </li>
-         <li><a href="soup.html"> Form</a> </li>
-         <li><a href="chicken.html"> Login</a> </li>
+         <li><a href="recipes.html"> Recipes</a> </li>
+         <li><a href="form.html"> Form</a> </li>
+         <li><a href="login.html"> Login</a> </li>
       </ul>
    </div>
    <div id="content">
    <h2> Welcome To Our Special Recipes!</h2>
       <p>If you have ever wonder what you should prepared for an awesome meal, here are some suggestions for a fine meal.<br/>
-         
       </p>
+      <hr></hr>
+      <h3>Here is the most popular dish on Chef's Recipes:</h3>
+      <div id="pop"></div>
       <p>
          Enjoy your meal!
       </p>
    </div>
+   <script>
+   var out = document.getElementById("pop");
+	function show(){
+		var anObj = new XMLHttpRequest();
+		anObj.open("GET", "indexController.php?", true);
+		anObj.send();
+		anObj.onreadystatechange = function () {
+			if (anObj.readyState == 4 && anObj.status == 200) {
+				var array = JSON.parse(anObj.responseText);
+				var id = array[0]["ID"];
+				var ajax = new XMLHttpRequest();
+				ajax.open("GET", "recipes.php?pop=" + id, true);
+				ajax.send();
+				ajax.onreadystatechange =
+				function () {
+					if (ajax.readyState == 4 && ajax.status == 200) {
+						out.innerHTML = ajax.responseText;
+					}
+				}
+			}
+		}
+	}
+   </script>
 
 </body>
 </html>
