@@ -66,7 +66,7 @@ CREATE TABLE `favorites` (
 
 LOCK TABLES `favorites` WRITE;
 /*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
-INSERT INTO `favorites` VALUES (0,1),(0,2);
+INSERT INTO `favorites` VALUES (0,1);
 /*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +79,8 @@ DROP TABLE IF EXISTS `recipes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `recipes` (
   `ID` int(11) DEFAULT NULL,
-  `Name` varchar(64) DEFAULT NULL
+  `Name` varchar(64) DEFAULT NULL,
+  `Favorited` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +90,7 @@ CREATE TABLE `recipes` (
 
 LOCK TABLES `recipes` WRITE;
 /*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
-INSERT INTO `recipes` VALUES (0,'Chicken Breast'),(1,'Spaghetti'),(2,'Fried Rice');
+INSERT INTO `recipes` VALUES (0,'Chicken Breast',0),(1,'Spaghetti',1),(2,'Fried Rice',0);
 /*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -102,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-05 15:35:27
+-- Dump completed on 2019-12-08 22:06:34
