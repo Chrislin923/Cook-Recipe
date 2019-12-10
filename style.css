@@ -7,7 +7,7 @@ body {
 .header {
 	padding-top: 1px;
 	padding-bottom: 1px; 
-	background-color : black;
+	background-color : #F3962B;
 	text-align: center;
 }
 
@@ -26,7 +26,7 @@ h1 {
 .h2 {
 	font-family: courier, arial, helvetica;
 	font-size: 30px;
-	background-color: white;
+	background-color: #FABD78;
 	color: black;
 	padding: 10px;
 	text-align: center;
@@ -135,9 +135,9 @@ dt, dd {
 }
 
 .button {
-	background-color: black;
+	background-color: #F3962B;
 	font-family: arial;
-	color: white;
+	color: black;
 	padding: 6px;
 	margin-top: 5px;
 	border-radius: 10px;
@@ -148,3 +148,4 @@ dt, dd {
 	text-align: center;
 	font-class: courier;
 }
+

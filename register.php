@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Register</title>
-<link href="styles.css" type="text/css" rel="stylesheet" />
+<link href="style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 
