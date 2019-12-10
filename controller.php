@@ -18,10 +18,27 @@ if($method === 'matchName'){//currently creates a table printing out user found 
 if($method === 'addRecipe'){
     $theDBA = new DatabaseAdapter();
     $name = $_GET['name'];
+    $servings = $_GET['servings'];
+    $image = $_GET['image'];
+    $ingred = $_GET['ingredients'];
+    $steps = $_GET['steps'];
     $numHolder = $theDBA->numRecipes();
     $num = $numHolder[0]['COUNT(*)'];
     $theDBA->addRecipe((int)$num, $name);
-    echo "submitted";
+    
+    copy($image, 'rImages/' . $num . '.jpg');
+    
+    $newFile = "rText/" . $num . ".txt";
+    $fh = fopen($newFile, 'w');
+    fwrite($fh, $name . "\n");
+    fwrite($fh, $servings . "\n\n");
+    $ingred = str_replace('|', PHP_EOL, $ingred);
+    fwrite($fh, $ingred . "\n\n");
+    $steps = str_replace('|', PHP_EOL, $steps);
+    fwrite($fh, $steps);
+    fclose($fh);
+    
+    echo $num;
     //alert("creating recipe:" . $name . ", with id: " . $num);
 }
 ?>

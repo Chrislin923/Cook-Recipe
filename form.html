@@ -6,9 +6,20 @@
 <title>Form Submit</title>
 <script>
 	function submitRecipe(){
-		var input = document.getElementById("plate").value;
+		var name = document.getElementById("plate").value;
+		var servings = document.getElementById("servings").value;
+		var image = document.getElementById("image").value;
+		var ingred = document.getElementById("ingred").value;
+		ingred = ingred.replace(/[\n]/g, "|");
+		var steps = document.getElementById("steps").value;
+		steps = steps.replace(/[\n]/g, "|");
+		
 		var ajax = new XMLHttpRequest();
-	   	var url = "controller.php?method=addRecipe&name=" + input;
+	   	var url = "controller.php?method=addRecipe&name=" + name
+	   			+ "&servings=" + servings
+	   			+ "&image=" + image
+	   			+ "&ingredients=" + ingred
+	   			+ "&steps=" + steps;
 	   	//var url = "DatabaseAdaptor.php";
 	   	ajax.open("GET", url, true); // Arguments Method, url, async 
 	   	ajax.send();
@@ -16,7 +27,8 @@
 	   		if (ajax.readyState == 4 && ajax.status == 200) {
 	   	   		 var docu = document.getElementById("divToChange");
 	   	   		 var arr = ajax.responseText;
-	   	   		 docu.innerHTML += arr;
+	   	   		 docu.innerHTML = "Submitted";
+	   	   		 docu.innerHTML += name + ", " + image + ", "+ servings + ", " + ingred + ", " + steps;
 	   	   	}
 	   	   	else {
 	   	   		//document.getElementById("divToChange").innerHTML = "failure";
@@ -43,6 +55,8 @@
 			<legend>Your Recipes</legend>
 			Name of Plate:<br>
 			<input id = "plate" type = "text" placeholder="Chicken Thigh"><br>
+			Image of Plate: (URL to it)<br>
+			<input id = "image" type="text" placeholder="https://example.com/thing.jpg"><br>
 			Number of Servings:<br>
 			<input id = "servings" type="number" placeholder="1"><br>
 			Ingredients/Amount: (Ingredient Name, # Amount Type)<br>
