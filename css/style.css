@@ -110,21 +110,18 @@ a:hover{
 	float: left;
 	margin: 5%;
 	padding: 10px;
-	width: 850px;
-	height: 300px;
+	width: 100%;
+	height: auto;
 }
 
 img {
 	height: 200px;
 	width: 200px;
-	float: left;
-	padding-bottom: 70px;
+	float: right;
 }
 
 .thedetails {
-	margin: 10px;
-    width: 650px;
-	height: 300px; 
+	margin: 10px; 
 }
 .back{
 	margin-left: 50%;

@@ -2,12 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 <title>Form Submit</title>
 <script>
 	function submitRecipe(){
 		var name = document.getElementById("plate").value;
 		var servings = document.getElementById("servings").value;
+			if(servings === "1")
+					servings += " Serving"
+			else
+					servings += " Servings"
 		var image = document.getElementById("image").value;
 		var ingred = document.getElementById("ingred").value;
 		ingred = ingred.replace(/[\n]/g, "|");
@@ -27,8 +31,8 @@
 	   		if (ajax.readyState == 4 && ajax.status == 200) {
 	   	   		 var docu = document.getElementById("divToChange");
 	   	   		 var arr = ajax.responseText;
-	   	   		 docu.innerHTML = "Submitted";
-	   	   		 docu.innerHTML += name + ", " + image + ", "+ servings + ", " + ingred + ", " + steps;
+	   	   		 docu.innerHTML = "<h1>Submitted!</h1>";
+	   	   		 //docu.innerHTML += name + ", " + image + ", "+ servings + ", " + ingred + ", " + steps;
 	   	   	}
 	   	   	else {
 	   	   		//document.getElementById("divToChange").innerHTML = "failure";
@@ -40,16 +44,16 @@
 </head>
 <body>
 <!-- Navigation bar -->
-   <div class = "navigation">
+	<h1>Submit Recipes</h1>
+	<div class = "navigation">
       <ul>
          <li><a href="index.html" class="current"> Home</a></li>
-         <li><a href="salad.html"> Recipes</a> </li>
+         <li><a href="recipes.html"> Recipes</a> </li>
          <li><a href="form.html"> Form</a> </li>
-         <li><a href="chicken.html"> Login</a> </li>
+         <li><a href="login.php"> Login</a> </li>
       </ul>
    </div>
-	<div id="divToChange"></div>
-	<h1>Submit Recipes</h1>
+   	<div id="divToChange"></div>
 	<form onsubmit = "submitRecipe(); return false;">
 		<fieldset>
 			<legend>Your Recipes</legend>

@@ -7,12 +7,12 @@ if (isset($_GET['text'])){
     $id = $_GET['text'];
     $path = "rText/".$_GET['text']. '.txt';
     $output = "<div class = 'onereview'> <img src = rImages/". $id . ".jpg>
-     <div class = 'thedetails' >";
+     <p class = 'thedetails' >";
     $file = fopen($path,"r");
     while(! feof($file))  {
         $output .= fgets($file)."<br>";
     }
-    $output .= "</div></div><button class = 'back' onclick='showAll()'>Back</button>";
+    $output .= "</p></div><button class = 'back' onclick='showAll()'>Back</button>";
     fclose($file);
     echo ( $output );
 }
@@ -26,6 +26,7 @@ if (isset($_GET['pop'])){
         $output .= fgets($file)."<br>";
     }
     fclose($file);
+    $output .= "</div></div>";
     echo ( $output );
 }
 ?>
