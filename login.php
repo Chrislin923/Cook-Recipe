@@ -18,11 +18,13 @@ session_start();
 	</div>
 	<div class="login">
 		<form class="login" action="index.html" method="post">
-			Email: <input type="text" name="email" required><br> Password: <input
+			Username: <input type="text" name="username" required><br> Password: <input
 				type="password" name="password" required><br> <input type="submit"
 				value="Log in" class="button">
 
-			<!-- need to validate!! -->
+			<?php if (isset($_SESSION['error']) == - 1) { ?>
+				<p id="incorrectPassword">Incorrect email or password.</p>
+			<?php session_destroy(); session_regenerate_id(TRUE); } ?>
 
 		</form>
 	</div>

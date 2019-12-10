@@ -11,8 +11,8 @@
 		<p class="h2">Register</p>
 	</div>
 	
-	<div>
-		<form class="login" action="index.html" method="post">
+	<div id="newAccount">
+		<form id="newAccount" class="login" action="valid.php" method="post">
 
 			First Name: <input type="text" id="firstName" name="firstName"
 				pattern="[A-Z a-z]*" required autocomplete='given-name'> <br> <br>
@@ -20,16 +20,17 @@
 			Last Name: <input type="text" id="lastName" name="lastName"
 				pattern="[A-Z a-z]*" required autocomplete='given-name'> <br> <br>
 
-			Email: <input type="text" id="email" name="email"
-				pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-				required autocomplete='given-email'> <br> <br> Password: <input
-				type="password" name="password"
-				pattern="(?=.*[A-Z])(?=.*[0-9])(?=.{6,})" required
-				oninvalid="setCustomValidity('Password must be at least 6 characters and contain at least one uppercase and one special character.')"
-				onchange="try{setCustomValidity('')}catch(e){}"> <br> <br> 
-				
-			<input type="submit" value="Register" class="button">
-		
+			Username: <input type="text" id="username" name="username"
+				pattern="[a-z]*" required autocomplete='user-name'> <br> <br>
+
+			Password: <input type="password" name="password"
+				pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required
+				autocomplete='given-password'
+				oninvalid="setCustomValidity('Minimum eight characters, at least one letter and one number:')"
+				onchange="try{setCustomValidity('')}catch(e){}"> <br> <br> <input
+				type="hidden" name="newUser"> <input type="submit" value="Register"
+				class="button">
+
 		</form>
 
 	</div>
