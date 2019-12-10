@@ -12,7 +12,7 @@ if (isset($_GET['text'])){
     while(! feof($file))  {
         $output .= fgets($file)."<br>";
     }
-    $output .= "</p></div><button class = 'back' onclick='showAll()'>Back</button>";
+    $output .= "</p></div><button class='back' id='fav' onclick='addToFavorites(". $id ."); return false;'>Add to Favorites</button></br><button class = 'back' onclick='showAll()'>Back</button>";
     fclose($file);
     echo ( $output );
 }

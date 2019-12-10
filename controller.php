@@ -1,22 +1,8 @@
 <?php
 include 'DatabaseAdapter.php';
 $method = $_GET['method'];
-if($method === 'matchName'){//currently creates a table printing out user found as a template
-    $theDBA = new DatabaseAdapter();
-    $array = $theDBA->getAllUsers();
-    if(empty($array)){
-        echo "No users in database";
-    }
-    else{
-        echo "<table>";
-        foreach ($array as $arr){
-            echo "user found, ". $arr[0] ."\n";
-        }
-        echo "</table>";
-    }
-}
+$theDBA = new DatabaseAdapter();
 if($method === 'addRecipe'){
-    $theDBA = new DatabaseAdapter();
     $name = $_GET['name'];
     $servings = $_GET['servings'];
     $image = $_GET['image'];
@@ -40,5 +26,19 @@ if($method === 'addRecipe'){
     
     echo $num;
     //alert("creating recipe:" . $name . ", with id: " . $num);
+}
+if($method === 'addFavorite'){
+    $id = $_GET['id'];
+    $user = $_GET['user'];
+    $in = 0;
+    $list = $theDBA->countFavorites($user, $id);
+    $in = $list[0]["count(recipeID)"];
+    if($in === '0'){
+        $theDBA->addFavorite($user, $id);
+        echo "Added!";
+    }
+    else{
+        echo "This dish is already in your favorites";
+    }
 }
 ?>

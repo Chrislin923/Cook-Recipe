@@ -34,6 +34,23 @@
 			}
 		}
 	}
+	   function addToFavorites(id){
+			var user = 0;
+			var ajax = new XMLHttpRequest();
+		   	var url = "controller.php?method=addFavorite&id=" + id
+		   			+ "&user=" + user;
+		   	ajax.open("GET", url, true); // Arguments Method, url, async 
+		   	ajax.send();
+		   	ajax.onreadystatechange = function () { 
+		   		if (ajax.readyState == 4 && ajax.status == 200) {
+		   	   		 var arr = ajax.responseText;
+		   	   		 alert(arr);
+		   	   	}
+		   	   	else {
+		   	   		//document.getElementById("divToChange").innerHTML = "failure";
+		   	   	}
+		   	}
+		}
 	function recipe(event){
 		var id = event.target.id;
 		var ajax = new XMLHttpRequest();

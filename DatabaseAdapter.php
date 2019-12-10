@@ -71,7 +71,13 @@ class DatabaseAdapter {
     }
     
     public function getFavorites ($ID) {
-        $stmt = $this->DB->prepare( "SELECT recipes.Name FROM recipes JOIN favorites ON favorites.recipeID = recipes.ID JOIN customers on customers.ID = favorites.customerID WHERE customers.ID = ". $ID ."");
+        $stmt = $this->DB->prepare( "SELECT recipes.Name, recipes.ID FROM recipes JOIN favorites ON favorites.recipeID = recipes.ID JOIN customers on customers.ID = favorites.customerID WHERE customers.ID = ". $ID ."");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function countFavorites ($ID, $RecipeID){
+        $stmt = $this->DB->prepare( "select count(recipeID) from favorites where recipeID = ". $RecipeID ." AND customerID = ". $ID .";");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -88,8 +94,8 @@ class DatabaseAdapter {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
+/*
 $theDBA = new DatabaseAdapter ();
-$arr = $theDBA->FavoriteList();
-print_r ($arr);
+$arr = $theDBA->countFavorites(0, 4);
+print_r ($arr);*/
 ?>
